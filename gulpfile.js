@@ -1,5 +1,10 @@
-// Подключаем к файлу библиотеку gulp
+// Подключаем к файлу библиотеку gulp.
 let gulp = require('gulp');
+
+// Последовательное выполнение.
+const { series } = require('gulp');
+// Паралельное выполнение.
+const { parallel } = require('gulp');
 
 // Задача и коллбэк
 // Коллбэк - функция, которая вызывается в конце задачи. Уведомляет gulp о том, что задача завершена и можно приступать к следующей.
@@ -37,6 +42,24 @@ function getDayMonthYear(cb) {
     cb();
 }
 
+// Задача #4 - Три задачи выполняющиеся последовательно.
+function getseries(cb) {
+    series(day, month, year);
+    cb();
+}
+
+// Задача #5 - Три задачи выполняющиеся паралельно.
+function getparallel(cb) {
+    parallel(day, month, year);
+    cb();
+}
+
+// Задача #6 - Комбинации задач.
+function getcombo(cb) {
+    series(day, parallel(month, year));
+    cb();
+}
+
 // Команды в консоль.
 // Основная задача, одна на файл, экспортируется по умолчанию.
 exports.default = task;
@@ -46,3 +69,9 @@ exports.month = month;
 exports.year = year;
 // Экспортируем задачу, содержащую внутри себя другие задачи.
 exports.getDayMonthYear = getDayMonthYear;
+// Последовательное выполнение.
+exports.getseries = getseries;
+// Паралельное выполнение.
+exports.getparallel = getparallel;
+// Комбинация параельного и последовательного.
+exports.getcombo = getcombo;
