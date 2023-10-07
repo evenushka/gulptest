@@ -1,0 +1,11 @@
+$width: 100px;
+
+div {
+  width: $width;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  background: wheat;
+}
